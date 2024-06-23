@@ -1,3 +1,4 @@
+# Setup
 build:
 	docker build -t scrapper_img .
 
@@ -7,6 +8,16 @@ up:
 	--name scrapper_cont \
 	scrapper_img
 
+build_up:
+	make build
+	make up
+
+build_up_no_cache:
+	docker build --no-cache -t scrapper_img .
+	make up
+
+
+# Run
 run:
 	docker exec -it scrapper_cont python3 scrapper/scrap.py $(url)
 
@@ -16,7 +27,7 @@ run_example_manual:
 
 run_example_auto:
 	# Call the category page and use the first item (if exists) as input for make run
-	url=$$(docker exec -it scrapper_cont python3 src/test/get_link_first_product.py); \
+	url=$$(docker exec -it scrapper_cont python3 src/test/get_link_first_product.py | tr -d '\r'); \
 	if [ "$$url" != "No products found" ]; then \
 		make run url="$$url"; \
 	else \
@@ -27,11 +38,8 @@ run_example:
 	# Juat to make this example more generic, it will be suitable to call to a category page and run the example with the first item (if exists)
 	docker exec -it scrapper_cont python3 scrapper/scrap.py "https://en.gb.scalperscompany.com/products/bbcstudio24-44361-fill-ruffle-skirt-ss24-lilac"
 
-build_up_run:
-	make build
-	make up
-	make run
 
+# Down and remove
 down:
 	docker stop scrapper_cont
 
