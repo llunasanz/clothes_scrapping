@@ -3,7 +3,7 @@
 # Index
 
 1. Test README file
-
+2. Directory tree
 
 # 1. Test README file
  
@@ -118,4 +118,31 @@ Don't worry if you don't get to finish the task in the timeframe we want to see 
 * We want to see a clear commit history that reflects the process of your work.
 * Clean code. It doesn't mean every method and class needs comments. If the code is self-explanatory that's enough.
 * Following common development standards so a well-structured code and architecture is welcomed.
+
+
+# 2. Directory tree
+
+```
+.
+├── Dockerfile
+├── Makefile
+├── README.md
+├── assets
+│   └── untitled.png
+├── pyproject.toml
+├── requirements.txt
+├── scrapper
+│   └── scrap.py
+├── schema
+│   └── product.py
+├── src
+│   └── test
+│       └── get_link_first_product.py
+└── tests
+    ├── assets
+    │   └── example_skirt_000.html
+    ├── test__unit__get_link_first_product.py
+    └── test__unit__scrap.py
+```
+
 
