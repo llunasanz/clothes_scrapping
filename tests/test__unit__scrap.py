@@ -38,7 +38,7 @@ class TestScrap(unittest.TestCase):
 
     def test_extract_data_sizes(self):
         result = scrap.extract_data(self.soup, 'sizes')
-        self.assertEqual(result, ['S', 'L', 'M'])
+        self.assertEqual(result, ['S', 'M', 'L'])
 
     def test_extract_data_colours(self):
         result = scrap.extract_data(self.soup, 'colours')
@@ -58,7 +58,7 @@ class TestScrap(unittest.TestCase):
             'metadata': 'NEW LEATHER BELT SKIRT',
             'images': ['https://en.gb.scalperscompany.com/cdn/shop/files/34764-BLACK-P-1_b11c05e2-f100-4d5d-aba3-cee484bbbb1e.jpg?v=1715949820', 'https://en.gb.scalperscompany.com/cdn/shop/files/34764-BLACK-P-2_468e4a50-103a-472d-ad10-e3613022461c.jpg?v=1715949821', 'https://en.gb.scalperscompany.com/cdn/shop/files/34764-BLACK-P-3_708adc76-67a9-492d-9198-be6964dba90e.jpg?v=1715949820', 'https://en.gb.scalperscompany.com/cdn/shop/files/34764-BLACK-P-4.jpg?v=1715949820', 'https://en.gb.scalperscompany.com/cdn/shop/files/34764-BLACK-S-1.jpg?v=1715949820', 'https://en.gb.scalperscompany.com/cdn/shop/files/34764-BLACK-S-2.jpg?v=1715949820', 'https://en.gb.scalperscompany.com/cdn/shop/files/34764-BLACK-P-1_b11c05e2-f100-4d5d-aba3-cee484bbbb1e_250x.jpg?v=1715949820', 'https://en.gb.scalperscompany.com/cdn/shop/files/34764-BLACK-P-1_b11c05e2-f100-4d5d-aba3-cee484bbbb1e_800x.jpg?v=1715949820', 'https://en.gb.scalperscompany.com/cdn/shop/files/34764-BLACK-P-2_468e4a50-103a-472d-ad10-e3613022461c_800x.jpg?v=1715949821', 'https://en.gb.scalperscompany.com/cdn/shop/files/34764-BLACK-P-3_708adc76-67a9-492d-9198-be6964dba90e_800x.jpg?v=1715949820', 'https://en.gb.scalperscompany.com/cdn/shop/files/34764-BLACK-P-4_800x.jpg?v=1715949820', 'https://en.gb.scalperscompany.com/cdn/shop/files/34764-BLACK-S-1_800x.jpg?v=1715949820', 'https://en.gb.scalperscompany.com/cdn/shop/files/34764-BLACK-S-2_800x.jpg?v=1715949820'],
             'price': '£139',
-            'sizes': ['S', 'L', 'M'],
+            'sizes': ['S', 'M', 'L'],
             'colours': ['BLACK']
         }
 
