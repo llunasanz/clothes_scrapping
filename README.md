@@ -129,6 +129,7 @@ Don't worry if you don't get to finish the task in the timeframe we want to see 
 ├── README.md
 ├── assets
 │   └── untitled.png
+├── original_test.zip
 ├── pyproject.toml
 ├── requirements.txt
 ├── scrapper
@@ -136,11 +137,13 @@ Don't worry if you don't get to finish the task in the timeframe we want to see 
 ├── schema
 │   └── product.py
 ├── src
+│   ├── get_all_products_links.py
 │   └── test
 │       └── get_link_first_product.py
 └── tests
     ├── assets
     │   └── example_skirt_000.html
+    ├── test__src__get_all_products_links.py
     ├── test__unit__get_link_first_product.py
     └── test__unit__scrap.py
 ```
