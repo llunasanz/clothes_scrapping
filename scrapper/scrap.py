@@ -23,6 +23,13 @@ class_to_key = {
     'colours': 'colours'
 }
 
+size_order = ["XXXS", "XXS", "XS", "S", "M", "L", "XL", "XXL", "XXXL"]
+
+def sort_sizes(sizes):
+    # Sort sizes based on their position in the predefined order
+    size_index = {size: index for index, size in enumerate(size_order)}
+    return sorted(sizes, key=lambda size: size_index.get(size, len(size_order)))
+
 def extract_data(soup, class_name):
     # Get the tag name from the dictionary
     tag_name = class_to_tag.get(class_name)
@@ -50,7 +57,7 @@ def extract_data(soup, class_name):
             lambda x: size_pattern.search(x.text.strip()).group(0) if size_pattern.search(x.text.strip()) else '', 
             soup.find_all('option')
         )))
-        return list(set(sizes))
+        return sort_sizes(list(set(sizes)))
 
     if class_name == 'colours':
         colours = list(filter(None, map(
