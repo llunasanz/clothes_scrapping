@@ -38,7 +38,7 @@ run_example:
 	# Juat to make this example more generic, it will be suitable to call to a category page and run the example with the first item (if exists)
 	docker exec -it scrapper_cont python3 scrapper/scrap.py "https://en.gb.scalperscompany.com/products/bbcstudio24-44361-fill-ruffle-skirt-ss24-lilac"
 
-run_tests:
+run_tests_no_docker:
 	python3 -m unittest discover -s tests
 
 
