@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, Mock
-from scrapper import scrap
+from src.scrapper import scrap
 from bs4 import BeautifulSoup
 import os
 

@@ -2,21 +2,17 @@ FROM python:3.10
 
 RUN mkdir /srv/project/
 
-RUN mkdir /srv/project/scrapper
+COPY assets /srv/project/assets
 
-RUN mkdir /srv/project/schema
+# COPY scrapper /srv/project/scrapper
 
-RUN mkdir /srv/project/src
-
-RUN mkdir /srv/project/src/test
-
-COPY scrapper/scrap.py /srv/project/scrapper/scrap.py
-
-COPY schema/product.py /srv/project/schema/product.py
+COPY schema /srv/project/schema
 
 COPY requirements.txt /srv/project/requirements.txt
 
-COPY src/test/get_link_first_product.py /srv/project/src/test/get_link_first_product.py
+COPY src /srv/project/src
+
+COPY tests /srv/project/tests
 
 WORKDIR /srv/project/
 
