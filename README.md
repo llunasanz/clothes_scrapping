@@ -1,6 +1,4 @@
-# Clothes scrapping
-
-Web scrapping use case from a data engineer test. The original data tests is in the zip file "original_test.zip".
+# Clothes scrapping (data engineer test)
 
 # Index
 
@@ -12,11 +10,15 @@ Web scrapping use case from a data engineer test. The original data tests is in 
 
 ## The task
 
-We are dedicated to offering our customers clothing that perfectly matches their unique style.
-Also, we continuously add new suppliers every day to ensure a greater variety for our customers.
-It is planned to include [Scalpers](https://en.gb.scalperscompany.com/) to our catalog. To do this, we need to gather all their product data. This will allow us to run it through our recommendation system and offer their products to our customers.
+Imagine we are a company that wants to provide their customers with the piece of clothing that fits the best their
+style.
+Every day, we add new suppliers, so we can provide more variety for our customer.
+Next we want to add [scalpers](https://en.gb.scalperscompany.com/) to our catalog, for that we need to get all their
+products data, so we can run it through our recommendation system and offer it to our customers.
 
-Our web scraping pipelines will run as on-demand batch jobs in a serverless deployment. Therefore, we need an automated process to install dependencies during deployment and maintain a clear structure to establish an entry point for the Docker image.
+Our pipelines for web scrapping will be run as an on-demand batch job in a serverless deployment, so we need to have a
+way to automatically install the dependencies in the deployment and have a clear structure to be able to have an entry
+point for the docker image.
 
 Your task is to modify [scrap.py](scrapper%2Fscrap.py) to be able to scrap a list of products from this
 webpage https://en.gb.scalperscompany.com/collections/woman-new-collection-skirts-2060.
@@ -24,9 +26,13 @@ Which is the "skirts" from the woman clothing collection from [scalpers](https:/
 
 ![untitled.png](assets/untitled.png)
 
-If the link is broken, we want to evaluate your ability to write code for extracting data from the web. Any collection of products from that shop will be acceptable.
+In case the link is broken, we are looking to see your abilities to write code to extract data from the web. So any
+collection of products from that shop will also do.
 
-The output should be a JSON containing a list of all the skirts. You can refer to schema/product.py for the output format. The format is minimal, so feel free to enhance it based on the available data for each product on the webpage.
+The output should be a json with the list of all the skirts. You can look at `schema/product.py` to have an idea of the
+output format.
+The format is quite minimal, so you are welcome to improve it in the way you think it would make sense based on the data
+available in the webpage for each product.
 
 Using [this product](https://en.gb.scalperscompany.com/products/bbcstudio24-50505-strapless-linen-dress-ss24-red) as
 input, an example of how the output looks like for our schema is the next:
@@ -66,39 +72,52 @@ input, an example of how the output looks like for our schema is the next:
 }
 ```
 
-Once again, if you think the schema can be improved, feel free to make enhancements as you see fit.
+Yet again if you think the schema can be improved, feel free to do so.
 
-You can find a minimal code example using BeautifulSoup4 in scrapper/scrap.py, which successfully scrapes the product_name for the product mentioned above.
+You can see a minimal code example with beautifulSoup4 in `scrapper/scrap.py` that can successfully scrap
+the `product_name` for the product above.
 
-You don’t need to use BeautifulSoup if you’re not comfortable with it. We've provided an example, but feel free to use any tools that will help you succeed in the task. Make this repository your own!
+You don't need to use BS4 if you don't feel comfortable with it, we just show an example that it can be done with it.
+Make this repository yours and use the tools that will make you succeed in the task!
 
-If you have enough time, it would be great to add clothing type as a parameter for the script. For example, you could run python -m scrap --type skirts or python -m scrap --type shirts, and it would return all the items for skirts or shirts, respectively.
+If you have enough time it would be nice to see the type of clothing as a parameters for the script so for example you
+could run `python -m scrap --type skirts` or `python -m scrap --type shirts` and returns all the clothes for skirts or
+shirts, respectively.
 
 ## How to proceed?
 
-To install dependencies, feel free to use any method you prefer. We use [Poetry](https://python-poetry.org/ for dependency management, but you can also use the provided requirements file. We've provided a set of tools to start with, but you don't need to use the same libraries. If you're more comfortable with different dependencies, feel free to continue the work with them!
+To install the dependencies use whatever you feel like, we use [poetry](https://python-poetry.org/) for dependency
+management, but you can also use the provided requirements file.
+We give you a set of tools that we use to start the work, but you don't need to use the same libraries as us, if you
+feel
+more comfortable using another dependencies feel free to continue the work with them!
 
-Feel free to use any tools you prefer, including any IDE, Copilot, or ChatGPT. It's not required, so use them only if you want to.
+Feel free to use any tool you want, that includes any IDE, Copilot, chatGPT, etc. It's not required, and it's not
+necessary if you don't want to.
 
-You should aim to spend no more than 2-3 hours on this project, as that should be sufficient to demonstrate how you structure your work.
+You should not spend more than 2-3h working on this project as that should be enough to show how you structure your
+work.
 
-All code, including comments, should be in English.
+All the code should be in english, including comments.
 
 ### Once you finish the project
 
-Please zip the folder contents, including the .git folder so we can review the commit history. Exclude folders like .venv, __pycache__, .idea, and anything typically included in a .gitignore file to keep the directory clean.
+Zip the folder content including the .git folder, so we can see the commit history.
+DON'T include `.venv`,`__pychache__`,`.idea`,etc. folders as they clutter the directory. Basically anything that would be included in a `.gitignore` file.
 
-Make sure to include instructions on how to run your code, and ensure that the code is functional.
+Be sure that you added instructions of how to run your code and the code is functional.
 
-After you submit the code, we’ll have a session to review your work. This will give you the opportunity to explain your process and share any relevant insights. We’ll provide feedback on what we liked and what could be improved.
+After you send the code back to us, we will have a session with you to review the work, so you get a chance to explain
+your process and add whatever you think is relevant.
+We will share our feedback about the code and talk about what we liked, what we didn't like, etc.
 
 ## What are we looking for?
 
-Don’t worry if you don’t finish the task within the timeframe. We want to see how you approach the problem.
+Don't worry if you don't get to finish the task in the timeframe we want to see how you approach the problem.
 
-* We want to see a clear commit history that reflects your work process.
-* Clean code is essential. Not every method and class needs comments; if the code is self-explanatory, that’s sufficient.
-* Following common development standards is important, so well-structured code and architecture are welcomed.
+* We want to see a clear commit history that reflects the process of your work.
+* Clean code. It doesn't mean every method and class needs comments. If the code is self-explanatory that's enough.
+* Following common development standards so a well-structured code and architecture is welcomed.
 
 
 # 2. Directory tree
@@ -113,12 +132,12 @@ Don’t worry if you don’t finish the task within the timeframe. We want to se
 ├── original_test.zip
 ├── pyproject.toml
 ├── requirements.txt
+├── scrapper
+│   └── scrap.py
 ├── schema
 │   └── product.py
 ├── src
 │   ├── get_all_products_links.py
-│   ├── scrapper
-│   │   └── scrap.py
 │   └── test
 │       └── get_link_first_product.py
 └── tests
@@ -126,7 +145,7 @@ Don’t worry if you don’t finish the task within the timeframe. We want to se
     │   └── example_skirt_000.html
     ├── test__src__get_all_products_links.py
     ├── test__unit__get_link_first_product.py
-    └── test__unit__src_scrapper__scrap.py
+    └── test__unit__scrap.py
 ```
 
 
