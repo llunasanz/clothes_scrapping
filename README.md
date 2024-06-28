@@ -1,6 +1,6 @@
 # Clothes scrapping
 
-Web scrapping use case from a data engineer test.
+Web scrapping use case from a data engineer test. The original data tests is in the zip file "original_test.zip".
 
 # Index
 
