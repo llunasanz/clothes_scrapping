@@ -4,8 +4,6 @@ RUN mkdir /srv/project/
 
 COPY assets /srv/project/assets
 
-# COPY scrapper /srv/project/scrapper
-
 COPY schema /srv/project/schema
 
 COPY requirements.txt /srv/project/requirements.txt
