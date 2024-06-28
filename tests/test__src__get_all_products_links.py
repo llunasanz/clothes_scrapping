@@ -88,6 +88,24 @@ class TestGetValidProductLinks(unittest.TestCase):
         result = get_valid_product_links(custom_url)
         self.assertEqual(result, expected_urls)
 
+    @patch('requests.get')
+    def test_get_valid_product_links_with_invalid_url(self, mock_get):
+        mock_get.return_value = Mock(status_code=404)
+
+        with self.assertRaises(ValueError) as context:
+            get_valid_product_links("http://invalid-url.com")
+
+        self.assertIn("Failed to fetch the main page", str(context.exception))
+
+    @patch('requests.get')
+    def test_main_with_invalid_url(self, mock_get):
+        mock_get.return_value = Mock(status_code=404)
+
+        with self.assertRaises(ValueError) as context:
+            get_valid_product_links("http://invalid-url.com")
+
+        self.assertIn("Failed to fetch the main page", str(context.exception))
+
 if __name__ == "__main__":
     unittest.main()
 
