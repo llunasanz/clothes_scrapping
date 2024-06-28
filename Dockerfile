@@ -2,17 +2,9 @@ FROM python:3.10
 
 RUN mkdir /srv/project/
 
-# RUN mkdir /srv/project/scrapper
-
-# RUN mkdir /srv/project/schema
-
-# RUN mkdir /srv/project/src
-
-# RUN mkdir /srv/project/src/test
-
 COPY assets /srv/project/assets
 
-COPY scrapper /srv/project/scrapper
+# COPY scrapper /srv/project/scrapper
 
 COPY schema /srv/project/schema
 

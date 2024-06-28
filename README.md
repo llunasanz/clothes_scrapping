@@ -132,12 +132,12 @@ Don't worry if you don't get to finish the task in the timeframe we want to see 
 ├── original_test.zip
 ├── pyproject.toml
 ├── requirements.txt
-├── scrapper
-│   └── scrap.py
 ├── schema
 │   └── product.py
 ├── src
 │   ├── get_all_products_links.py
+│   ├── scrapper
+│   │   └── scrap.py
 │   └── test
 │       └── get_link_first_product.py
 └── tests
@@ -145,7 +145,7 @@ Don't worry if you don't get to finish the task in the timeframe we want to see 
     │   └── example_skirt_000.html
     ├── test__src__get_all_products_links.py
     ├── test__unit__get_link_first_product.py
-    └── test__unit__scrap.py
+    └── test__unit__src_scrapper__scrap.py
 ```
 
 
