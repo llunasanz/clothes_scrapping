@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import argparse
 
+
 def get_product_links_from_page(url):
     valid_urls = []
     
@@ -24,6 +25,7 @@ def get_product_links_from_page(url):
     )))
 
     return valid_product_links
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Scrape product data from a URL.')
