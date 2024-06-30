@@ -6,7 +6,7 @@ import sys
 import os
 
 # Import the function from src/get_all_products_links.py
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src/links_getter')))
 from get_all_products_links import get_valid_product_links
 
 class TestGetValidProductLinks(unittest.TestCase):

@@ -70,13 +70,16 @@ def extract_data(soup, class_name):
     element = soup.find(tag_name, class_=class_name)
 
     # Check if there are any <li> tags within the element
-    list_items = element.find_all('li')
+    try:
+        list_items = element.find_all('li')
+    except Exception as e:
+        list_items = []
     if list_items:
         # Extract the text from each <li> tag
         return [item.get_text(strip=True) for item in list_items]
     
     # Extract the text content of the element
-    return element.get_text(strip=True)
+    return element.get_text(strip=True) if element else ""
 
 def scrape_product(url):
     data_dict = {}

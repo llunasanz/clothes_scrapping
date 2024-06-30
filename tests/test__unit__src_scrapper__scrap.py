@@ -44,7 +44,7 @@ class TestScrap(unittest.TestCase):
         result = scrap.extract_data(self.soup, 'colours')
         self.assertEqual(result, ['BLACK'])
 
-    @patch('scrapper.scrap.requests.get')
+    @patch('src.scrapper.scrap.requests.get')
     def test_scrape_product(self, mock_get):
         mock_response = Mock()
         mock_response.status_code = 200
@@ -67,4 +67,3 @@ class TestScrap(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
