@@ -6,6 +6,8 @@ Web scrapping use case from a data engineer test. The original data tests is in 
 
 1. Test README file
 2. Directory tree
+3. Function dictionaries
+
 
 # 1. Test README file
  
@@ -108,6 +110,12 @@ Don’t worry if you don’t finish the task within the timeframe. We want to se
 ├── Dockerfile
 ├── Makefile
 ├── README.md
+├── app
+│   ├── __init__.py
+│   └── modules
+│       ├── __init__.py
+│       ├── get_all_products_from_collection.py
+│       └── get_all_products_from_shop.py
 ├── assets
 │   └── untitled.png
 ├── original_test.zip
@@ -116,17 +124,50 @@ Don’t worry if you don’t finish the task within the timeframe. We want to se
 ├── schema
 │   └── product.py
 ├── src
-│   ├── get_all_products_links.py
+│   ├── __init__.py
+│   ├── links_getter
+│   │   ├── __init__.py
+│   │   ├── get_all_collection_links.py
+│   │   ├── get_all_products_links.py
+│   │   └── get_product_links_from_page.py
 │   ├── scrapper
+│   │   ├── __init__.py
 │   │   └── scrap.py
 │   └── test
 │       └── get_link_first_product.py
 └── tests
     ├── assets
     │   └── example_skirt_000.html
-    ├── test__src__get_all_products_links.py
+    ├── test__src__links_getter__get_all_collection_links.py
+    ├── test__src__links_getter__get_all_products_links.py
+    ├── test__src__links_getter__get_product_links_from_page.py
     ├── test__unit__get_link_first_product.py
     └── test__unit__src_scrapper__scrap.py
 ```
 
+
+# 3. Function dictionaries
+
+## src
+
+### links\_getter
+
+#### get\_product\_links\_from\_page.py
+This function return an array of URL products retrieving only the links with status 200. The input is an URL from a collection page.
+
+#### get\_all\_products\_links.py
+Similar to the previous function but retieving all products URLs at shop homepage.
+
+#### get\_all\_collection\_links.py
+It is almost the same function as the previous one. In this case, it returns an array of collection URLs.
+
+### scrap
+
+#### scrapper.py
+The function that get all the product information by scrapping the product page URL. The product data is stored in a dictionary.
+
+
+## app
+#### get\_all\_products\_from\_collection.py
+This script runs recursively `scrapper.py` to get an array of product data from all collection items.
 
