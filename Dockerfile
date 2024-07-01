@@ -1,22 +1,28 @@
 FROM python:3.10
 
+# Install Poetry
+RUN curl -sSL https://install.python-poetry.org | python3 - \
+    && mv /root/.local/bin/poetry /usr/local/bin/
+
+RUN mkdir /srv/project/
+
 WORKDIR /srv/project/
 
-# Copy only the requirements file first for better caching
-COPY requirements.txt .
+# Copy the poetry files
+COPY pyproject.toml /srv/project/
 
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies
+RUN poetry install
 
-COPY app app
-COPY assets assets
-COPY schema schema
-COPY src src
-COPY tests tests
+COPY app /srv/project/app
+COPY assets /srv/project/assets
+COPY schema /srv/project/schema
+COPY src /srv/project/src
+COPY tests /srv/project/tests
 
-RUN mkdir -p output
+RUN mkdir output/
+
+# Ensure Poetry's environment is used for subsequent commands
+ENV PATH="/srv/project/.venv/bin:$PATH"
 
 EXPOSE 34617
-
-# Use a non-root user
-RUN useradd -ms /bin/bash appuser
-USER appuser
