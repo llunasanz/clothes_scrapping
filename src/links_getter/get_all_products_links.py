@@ -18,7 +18,7 @@ def get_valid_product_links(url="https://en.gb.scalperscompany.com"):
         if product_response.status_code == 200:
             valid_urls.append(full_url)
     
-    return valid_urls
+    return sorted(list(set(valid_urls)))
 
 if __name__ == "__main__":
     urls = get_valid_product_links()  # You can pass a custom URL here if needed

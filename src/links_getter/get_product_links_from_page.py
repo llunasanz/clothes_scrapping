@@ -24,7 +24,7 @@ def get_product_links_from_page(url):
         product_links
     )))
 
-    return valid_product_links
+    return sorted(list(set(valid_product_links)))
 
 
 if __name__ == "__main__":

@@ -28,7 +28,7 @@ def get_collection_from_shop(url="https://en.gb.scalperscompany.com"):
           collection_urls
     )))
 
-    return valid_collection_urls
+    return sorted(list(set(valid_collection_urls)))
         
 
 if __name__ == "__main__":

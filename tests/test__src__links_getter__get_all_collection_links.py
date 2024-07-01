@@ -44,7 +44,7 @@ class TestGetCollectionFromShop(unittest.TestCase):
         ]
 
         result = get_collection_from_shop()
-        self.assertEqual(sorted(result), sorted(expected_urls))
+        self.assertEqual(result, sorted(expected_urls))
 
     @patch('requests.get')
     def test_get_collection_from_shop_with_custom_url(self, mock_get):
@@ -79,7 +79,7 @@ class TestGetCollectionFromShop(unittest.TestCase):
         ]
 
         result = get_collection_from_shop(custom_url)
-        self.assertEqual(sorted(result), sorted(expected_urls))
+        self.assertEqual(result, sorted(expected_urls))
 
     @patch('requests.get')
     def test_get_collection_from_shop_invalid_url(self, mock_get):
