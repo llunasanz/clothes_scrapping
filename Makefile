@@ -1,4 +1,5 @@
 # Setup
+
 build:
 	docker build -t scrapper_img .
 
@@ -16,16 +17,16 @@ build_up_no_cache:
 	docker build --no-cache -t scrapper_img .
 	make up
 
-
 # Run
+## Product
 run:
-	docker exec -it scrapper_cont python3 scrapper/scrap.py $(url)
+	docker exec -it scrapper_cont python3 src/scrapper/scrap.py $(url)
 
-run_example_manual:
+run_example_product_manual:
 	@read -p "Enter URL: " url; \
-	docker exec -it scrapper_cont python3 scrapper/scrap.py $$url
+	docker exec -it scrapper_cont python3 src/scrapper/scrap.py $$url
 
-run_example_auto:
+run_example_product_auto:
 	# Call the category page and use the first item (if exists) as input for make run
 	url=$$(docker exec -it scrapper_cont python3 src/test/get_link_first_product.py | tr -d '\r'); \
 	if [ "$$url" != "No products found" ]; then \
@@ -34,17 +35,31 @@ run_example_auto:
 		echo "No products found"; \
 	fi
 
-run_example:
-	# Juat to make this example more generic, it will be suitable to call to a category page and run the example with the first item (if exists)
-	docker exec -it scrapper_cont python3 scrapper/scrap.py "https://en.gb.scalperscompany.com/products/bbcstudio24-44361-fill-ruffle-skirt-ss24-lilac"
+run_example_product:
+	# Just to make this example more generic, it will be suitable to call to a category page and run the example with the first item (if exists)
+	docker exec -it scrapper_cont python3 src/scrapper/scrap.py "https://en.gb.scalperscompany.com/products/bbcstudio24-44361-fill-ruffle-skirt-ss24-lilac"
+
+## Collection
+run_example_collection:
+	docker exec -it scrapper_cont python3 app/modules/get_all_products_from_collection.py $(url)
+
+run_example_collection_manual:
+	@read -p "Enter URL: " url; \
+	docker exec -it scrapper_cont python3 app/modules/get_all_products_from_collection.py $$url
+
+## Shop
+run_example_shop:
+	docker exec -it scrapper_cont python3 app/modules/get_all_products_from_shop.py
+
+## Testing
+run_tests:
+	docker exec -it scrapper_cont python3 -m unittest discover -s tests
 
 run_tests_no_docker:
 	python3 -m unittest discover -s tests
 
-
-
 # Down and remove
-down:
+stop:
 	docker stop scrapper_cont
 
 rm_cont:
@@ -58,9 +73,17 @@ rm_all:
 	make rm_img
 
 stop_rm_all:
-	make down
+	make stop
 	make rm_all
 
 rebuild:
-	make rm_all
+	make stop_rm_all
 	make build
+
+rebuild_and_up:
+	make stop_rm_all
+	make build_up
+
+rebuild_and_up_no_cache:
+	make stop_rm_all
+	make build_up_no_cache
