@@ -2,6 +2,8 @@ FROM python:3.10
 
 RUN mkdir /srv/project/
 
+COPY app /srv/project/app
+
 COPY assets /srv/project/assets
 
 COPY schema /srv/project/schema
