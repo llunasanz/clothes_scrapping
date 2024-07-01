@@ -1,16 +1,23 @@
 [tool.poetry]
 name = "data-engineer-test"
-version = "1.0.0"
+version = "1.0.1"
 description = ""
-authors = ["Lluna Sanz <llunasanz@proton.me>"]
+authors = ["Lluna Sanz Montrull <llunasanz@proton.me>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+annotated-types = "^0.7.0"
+beautifulsoup4 = "^4.12.3"
+certifi = "^2024.6.2"
+charset-normalizer = "^3.3.2"
+idna = "^3.7"
+pydantic-core = "^2.18.4"
 pydantic = "^2.7.4"
 requests = "^2.32.3"
-beautifulsoup4 = "^4.12.3"
-
+soupsieve = "^2.5"
+typing-extensions = "^4.12.2"
+urllib3 = "^2.2.1"
 
 [build-system]
 requires = ["poetry-core"]
