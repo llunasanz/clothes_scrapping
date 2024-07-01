@@ -17,7 +17,6 @@ build_up_no_cache:
 	docker build --no-cache -t scrapper_img .
 	make up
 
-
 # Run
 ## Product
 run:
@@ -40,7 +39,6 @@ run_example_product:
 	# Just to make this example more generic, it will be suitable to call to a category page and run the example with the first item (if exists)
 	docker exec -it scrapper_cont python3 src/scrapper/scrap.py "https://en.gb.scalperscompany.com/products/bbcstudio24-44361-fill-ruffle-skirt-ss24-lilac"
 
-
 ## Collection
 run_example_collection:
 	docker exec -it scrapper_cont python3 app/modules/get_all_products_from_collection.py $(url)
@@ -49,11 +47,9 @@ run_example_collection_manual:
 	@read -p "Enter URL: " url; \
 	docker exec -it scrapper_cont python3 app/modules/get_all_products_from_collection.py $$url
 
-
 ## Shop
 run_example_shop:
 	docker exec -it scrapper_cont python3 app/modules/get_all_products_from_shop.py
-
 
 ## Testing
 run_tests:
@@ -61,8 +57,6 @@ run_tests:
 
 run_tests_no_docker:
 	python3 -m unittest discover -s tests
-
-
 
 # Down and remove
 stop:
