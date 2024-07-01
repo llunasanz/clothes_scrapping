@@ -2,6 +2,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 import argparse
+import json
 
 class_to_tag = {
     'ProductMeta__Title': 'h1',
@@ -108,7 +109,7 @@ def scrape_product(url):
             dict_key = class_to_key[class_name]
             data_dict[dict_key] = data
 
-    return data_dict
+    return json.dumps(data_dict)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Scrape product data from a URL.')
