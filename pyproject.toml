@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "data-engineer-test"
-version = "0.0.1"
+version = "1.0.0"
 description = ""
 authors = ["Lluna Sanz <llunasanz@proton.me>"]
 readme = "README.md"
