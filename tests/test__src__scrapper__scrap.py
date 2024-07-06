@@ -59,6 +59,21 @@ class TestScrap(unittest.TestCase):
         result = scrap.extract_data(self.soup, 'colours')
         self.assertEqual(result, ['BLACK'])
 
+    def test_split_currency_amount(self):
+        test_cases = [
+            ("£104", ("£", 104.0)),
+            ("$99.99", ("$", 99.99)),
+            ("€1000", ("€", 1000.0)),
+            ("1000€", ("€", 1000.0)),
+            ("1000 lei", ("lei", 1000.0)),
+            ("¥5000", ("¥", 5000.0)),
+            ("₹75", ("₹", 75.0))
+        ]
+        for s, expected in test_cases:
+            with self.subTest(s=s):
+                result = scrap.split_currency_amount(s)
+                self.assertEqual(result, expected)
+
     @patch('src.scrapper.scrap.requests.get')
     def test_scrape_product(self, mock_get):
         mock_response = Mock()

@@ -1,5 +1,6 @@
 import sys
 import os
+import json
 
 # Add the root directory to the PYTHONPATH
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
@@ -13,6 +14,8 @@ def get_all_product_details(collection_url):
 
     for product_url in product_links:
         product_details = scrape_product(product_url)
+        if isinstance(product_details, str):
+            product_details = json.loads(product_details)  # Parse the JSON string
         product_details['collection_url'] = collection_url
         all_product_details.append(product_details)
 
@@ -29,5 +32,4 @@ if __name__ == "__main__":
 
     product_details = get_all_product_details(collection_url)
     
-    for details in product_details:
-        print(details)
+    list(map(lambda details: print(details), product_details))
