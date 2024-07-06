@@ -24,6 +24,11 @@ class_to_key = {
     'colours': 'colours'
 }
 
+def split_currency_amount(s):
+    currency = ''.join(filter(lambda char: not char.isdigit() and char != '.', s)).replace(" ", "")
+    amount = float(''.join(filter(lambda char: char.isdigit() or char == '.', s)))
+    return currency, amount
+
 size_order = ["XXXS", "XXS", "XS", "S", "M", "L", "XL", "XXL", "XXXL"]
 
 def sort_sizes(sizes):
