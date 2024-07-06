@@ -95,6 +95,13 @@ def extract_colours(soup):
     return list(set(colours))
 
 
+def extract_list_items(element):
+    return list(map(
+        lambda item: item.get_text(strip=True),
+        element.find_all('li')
+    ))
+
+
 def extract_data(soup, class_name):
     # Get the tag name from the dictionary
     tag_name = class_to_tag.get(class_name)
@@ -113,16 +120,13 @@ def extract_data(soup, class_name):
     element = soup.find(tag_name, class_=class_name)
 
     # Check if there are any <li> tags within the element
-    try:
-        list_items = element.find_all('li')
-    except Exception as e:
-        list_items = []
-    if list_items:
-        # Extract the text from each <li> tag
-        return list(map(lambda item: item.get_text(strip=True), list_items))
-    
-    # Extract the text content of the element
-    return element.get_text(strip=True) if element else ""
+    if element:
+        try:
+            list_items = extract_list_items(element)
+            return list_items if list_items else element.get_text(strip=True)
+        except Exception:
+            return element.get_text(strip=True)
+    return ""
 
 
 def scrape_product(url):
