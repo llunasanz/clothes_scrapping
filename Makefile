@@ -53,9 +53,13 @@ run_example_shop:
 
 ## Testing
 run_tests:
+	# Find and execute all .sh test files
+	docker exec -it scrapper_cont bash tests/test__infra__get_last_price.sh
+	# Run Python tests
 	docker exec -it scrapper_cont poetry run python -m unittest discover -s tests
 
 run_tests_no_docker:
+	bash tests/test__infra__get_last_price.sh
 	python3 -m unittest discover -s tests
 
 # Down and remove

@@ -21,12 +21,17 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description="Scrape all product details from a shop URL.")
-    parser.add_argument('url', type=str, nargs='?', default="https://en.gb.scalperscompany.com/", help='The shop URL to scrape')
+    parser.add_argument(
+        'url',
+        type=str,
+        nargs='?',
+        default="https://en.gb.scalperscompany.com/",
+        help='The shop URL to scrape'
+    )
     
     args = parser.parse_args()
     collection_url = args.url
 
     all_details = get_all_products_recursively(collection_url)
 
-    for detail in all_details:
-        print(detail)
+    list(map(lambda details: print(details), product_details))
