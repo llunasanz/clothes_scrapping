@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import argparse
 import json
 
+
 class_to_tag = {
     'ProductMeta__Title': 'h1',
     'ProductMeta__SkuNumber': 'span',
@@ -13,6 +14,7 @@ class_to_tag = {
     'sizes': 'option',
     'colours': 'option'
 }
+
 
 class_to_key = {
     'ProductMeta__Title': 'product_name',
@@ -24,6 +26,7 @@ class_to_key = {
     'colours': 'colours'
 }
 
+
 def split_currency_amount(s):
     currency = ''.join(filter(lambda char: not char.isdigit() and char != '.', s)).replace(" ", "")
     amount = float(''.join(filter(lambda char: char.isdigit() or char == '.', s)))
@@ -31,30 +34,35 @@ def split_currency_amount(s):
 
 size_order = ["XXXS", "XXS", "XS", "S", "M", "L", "XL", "XXL", "XXXL"]
 
+
 def sort_sizes(sizes):
     # Sort sizes based on their position in the predefined order
-    size_index = {size: index for index, size in enumerate(size_order)}
+    size_index = size_index = dict(map(lambda x: (x[1], x[0]), enumerate(size_order)))
     return sorted(sizes, key=lambda size: size_index.get(size, len(size_order)))
+
+
+def extract_images(soup):
+    list_items = soup.find_all('img')
+    product_name = soup.find('h1', class_='ProductMeta__Title').text.strip()
+    matching_images_0 = list(filter(None, map(
+        lambda x: x.get('data-original-src') if x.get('alt') == product_name else '', 
+        list_items
+    )))
+    matching_images_1 = list(filter(None, map(
+        lambda x: x.get('src') if x.get('alt') == product_name else '', 
+        list_items
+    )))
+    matching_images = matching_images_0 + matching_images_1
+    return list(map(lambda x: 'https:' + x, matching_images))
+
 
 def extract_data(soup, class_name):
     # Get the tag name from the dictionary
     tag_name = class_to_tag.get(class_name)
 
     # Take care about special cases (images, sizes and colours)
-    if tag_name == 'img':
-        list_items = soup.find_all('img')
-        product_name = soup.find('h1', class_='ProductMeta__Title').text.strip()
-        matching_images_0 = list(filter(None, map(
-            lambda x: x.get('data-original-src') if x.get('alt') == product_name else '', 
-            list_items
-        )))
-        matching_images_1 = list(filter(None, map(
-            lambda x: x.get('src') if x.get('alt') == product_name else '', 
-            list_items
-        )))
-        matching_images = matching_images_0 + matching_images_1
-        matching_images = list(map(lambda x: 'https:' + x, matching_images))
-        return matching_images
+    if class_name == 'img':
+        return extract_images(soup)
 
     size_pattern = re.compile(r'\b(?:XXXS|XXS|XS|S|M|L|XL|XXL|XXXL)\b')
 
@@ -82,39 +90,35 @@ def extract_data(soup, class_name):
         list_items = []
     if list_items:
         # Extract the text from each <li> tag
-        return [item.get_text(strip=True) for item in list_items]
+        return list(map(lambda item: item.get_text(strip=True), list_items))
     
     # Extract the text content of the element
     return element.get_text(strip=True) if element else ""
 
+
 def scrape_product(url):
-    data_dict = {}
     # Send a GET request
     response = requests.get(url)
 
-    # Check if the request was successful
-    if response.status_code == 200:
-        # Initialize BeautifulSoup object with the response text
-        soup = BeautifulSoup(response.text, 'html.parser')
-    else:
-        print("Failed to fetch the webpage. Status code:", response.status_code)
+    # Check if the request was successful and initialize BeautifulSoup object
+    if response.status_code != 200:
+        print(f"Failed to fetch the webpage. Status code: {response.status_code}")
         return {}
+
+    soup = BeautifulSoup(response.text, 'html.parser')
+    data_dict = {"product_url": url}
 
     # Using more specific CSS selectors to target the div correctly
     details_div = soup.select_one('.Collapsible.Collapsible--large .Collapsible__Content')
 
-    class_names = list(class_to_tag.keys())
-
-    data_dict["product_url"] = url
-
-    for class_name in class_names:
+    # Iterate over class_to_tag keys directly
+    for class_name in class_to_tag:
         data = extract_data(soup, class_name)
         if data:
-            # Map the class name to the final dictionary key
-            dict_key = class_to_key[class_name]
-            data_dict[dict_key] = data
+            data_dict[class_to_key[class_name]] = data
 
     return json.dumps(data_dict)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Scrape product data from a URL.')
