@@ -118,6 +118,8 @@ Don’t worry if you don’t finish the task within the timeframe. We want to se
 │       └── get_all_products_from_shop.py
 ├── assets
 │   └── untitled.png
+├── infra
+│   └── get_last_price.sh
 ├── original_test.zip
 ├── pyproject.toml
 ├── requirements.txt
@@ -139,6 +141,7 @@ Don’t worry if you don’t finish the task within the timeframe. We want to se
     ├── assets
     │   └── example_skirt_000.html
     ├── test__app__modules__get_all_products_from_collection.py
+    ├── test__infra__get_last_price.sh
     ├── test__src__links_getter__get_all_collection_links.py
     ├── test__src__links_getter__get_all_products_links.py
     ├── test__src__links_getter__get_product_links_from_page.py
