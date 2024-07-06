@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import patch, Mock
 import sys
 import os
+import json
 
 # Add the app/modules directory to the system path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../app/modules')))
@@ -20,7 +21,7 @@ class TestGetAllProductDetails(unittest.TestCase):
             "https://en.gb.scalperscompany.com/products/67890-product-two"
         ]
         mock_product_details = [
-            {
+            json.dumps({
                 'product_url': "https://en.gb.scalperscompany.com/products/12345-product-one",
                 'product_name': "Product One",
                 'sku': '12345',
@@ -29,8 +30,8 @@ class TestGetAllProductDetails(unittest.TestCase):
                 'price': '£50',
                 'sizes': ['S', 'M', 'L'],
                 'colours': ['Red', 'Blue']
-            },
-            {
+            }),
+            json.dumps({
                 'product_url': "https://en.gb.scalperscompany.com/products/67890-product-two",
                 'product_name': "Product Two",
                 'sku': '67890',
@@ -39,7 +40,7 @@ class TestGetAllProductDetails(unittest.TestCase):
                 'price': '£70',
                 'sizes': ['M', 'L', 'XL'],
                 'colours': ['Green', 'Yellow']
-            }
+            })
         ]
 
         # Set up the mocks
@@ -80,4 +81,3 @@ class TestGetAllProductDetails(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
