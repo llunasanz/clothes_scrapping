@@ -35,36 +35,49 @@ input, an example of how the output looks like for our schema is the next:
 
 ```json
 {
-  "roduct_url": "https://en.gb.scalperscompany.com/products/bbcstudio24-50505-strapless-linen-dress-ss24-red",
-  "product_name": "LINEN MIDI DRESS WITH DRAPED CHEST",
-  "sku": "8445279814248",
+  "product_url": "https://en.gb.scalperscompany.com/products/40459-bach-dress-aw2324-black",
+  "product_name": "MIDI DRESS WITH LUREX PAISLEY",
+  "sku": "8445279630145",
   "metadata": [
-    "Made of 100% cotton",
+    "Made of flowing fabric with metallic yarn detailing",
     "Regular fit",
-    "Square neckline",
-    "Zip fastening",
-    "Thin straps with ruffle detail"
+    "V-neck",
+    "Long sleeves with elastic cuffs",
+    "Ruffle detail"
   ],
   "images": [
-    "https://en.gb.scalperscompany.com/cdn/shop/files/BBC-50505-RED-2_8392707e-c459-4eb2-b8d5-20dd3bba8b2c.jpg?v=1715950630",
-    "https://en.gb.scalperscompany.com/cdn/shop/files/BBC-50505-RED-2_8392707e-c459-4eb2-b8d5-20dd3bba8b2c_800x.jpg?v=1715950630",
-    "https://en.gb.scalperscompany.com/cdn/shop/files/BBC-50505-RED-1_12cca2fa-3e2c-4e18-b145-927e0cae6c1b.jpg?v=1715950630",
-    "https://en.gb.scalperscompany.com/cdn/shop/files/BBC-50505-RED-1_12cca2fa-3e2c-4e18-b145-927e0cae6c1b_800x.jpg?v=1715950630",
-    "https://en.gb.scalperscompany.com/cdn/shop/files/BBC-50505-RED-3_70b33f83-8a5d-4604-8cfe-d342011d122e.jpg?v=1715950630",
-    "https://en.gb.scalperscompany.com/cdn/shop/files/BBC-50505-RED-3_70b33f83-8a5d-4604-8cfe-d342011d122e_800x.jpg?v=1715950630"
+    "https://en.gb.scalperscompany.com/cdn/shop/files/40459-BLACK-P-1_2ff64361-5f85-43c6-b790-4998f8aa4ab9.jpg?v=1715949943",
+    "https://en.gb.scalperscompany.com/cdn/shop/files/40459-BLACK-P-2_600f1302-48ad-4a3f-b7b1-6e17a99bfdf8.jpg?v=1715949943",
+    "https://en.gb.scalperscompany.com/cdn/shop/files/40459-BLACK-P-3_59d6b46e-2df9-49fa-8940-0b88778fc94b.jpg?v=1715949943",
+    "https://en.gb.scalperscompany.com/cdn/shop/files/40459-BLACK-P-4_45a36c3f-e4ed-4170-80d4-133d331f8ae7.jpg?v=1715949943",
+    "https://en.gb.scalperscompany.com/cdn/shop/files/40459-BLACK-P-5_d9444e24-4c4c-4a38-bfce-e28f0160a2fa.jpg?v=1715949943",
+    "https://en.gb.scalperscompany.com/cdn/shop/files/40459-BLACK-P-6_50e501b8-4a1d-445b-8a86-0025132e88e0.jpg?v=1715949942",
+    "https://en.gb.scalperscompany.com/cdn/shop/files/40459-BLACK-S-1_e5b4df3b-b33e-4e7c-9538-08d09a25c10f.jpg?v=1715949942",
+    "https://en.gb.scalperscompany.com/cdn/shop/files/40459-BLACK-S-2_41616034-59bc-4e6b-8a4b-0d4fd517d66d.jpg?v=1715949944",
+    "https://en.gb.scalperscompany.com/cdn/shop/files/40459-BLACK-P-1_2ff64361-5f85-43c6-b790-4998f8aa4ab9_250x.jpg?v=1715949943",
+    "https://en.gb.scalperscompany.com/cdn/shop/files/40459-BLACK-P-1_2ff64361-5f85-43c6-b790-4998f8aa4ab9_800x.jpg?v=1715949943",
+    "https://en.gb.scalperscompany.com/cdn/shop/files/40459-BLACK-P-2_600f1302-48ad-4a3f-b7b1-6e17a99bfdf8_800x.jpg?v=1715949943",
+    "https://en.gb.scalperscompany.com/cdn/shop/files/40459-BLACK-P-3_59d6b46e-2df9-49fa-8940-0b88778fc94b_800x.jpg?v=1715949943",
+    "https://en.gb.scalperscompany.com/cdn/shop/files/40459-BLACK-P-4_45a36c3f-e4ed-4170-80d4-133d331f8ae7_800x.jpg?v=1715949943",
+    "https://en.gb.scalperscompany.com/cdn/shop/files/40459-BLACK-P-5_d9444e24-4c4c-4a38-bfce-e28f0160a2fa_800x.jpg?v=1715949943",
+    "https://en.gb.scalperscompany.com/cdn/shop/files/40459-BLACK-P-6_50e501b8-4a1d-445b-8a86-0025132e88e0_800x.jpg?v=1715949942",
+    "https://en.gb.scalperscompany.com/cdn/shop/files/40459-BLACK-S-1_e5b4df3b-b33e-4e7c-9538-08d09a25c10f_800x.jpg?v=1715949942",
+    "https://en.gb.scalperscompany.com/cdn/shop/files/40459-BLACK-S-2_41616034-59bc-4e6b-8a4b-0d4fd517d66d_800x.jpg?v=1715949944"
   ],
-  "price": "£104",
+  "currency": "GBP (£)",
+  "date_time_of_conversion": "2024-07-07 12:35:31",
+  "price_in_EUR": 94.2,
+  "price_in_GBP": 79.9,
+  "price_in_USD": 102.24,
   "sizes": [
-    "XS",
-    "S",
-    "M",
-    "L",
     "XS",
     "S",
     "M",
     "L"
   ],
-  "cloth_type": "dress"
+  "colours": [
+    "BLACK"
+  ]
 }
 ```
 
