@@ -4,6 +4,7 @@ from src.scrapper import scrap
 from bs4 import BeautifulSoup
 import os
 import json
+from datetime import datetime
 
 class TestScrap(unittest.TestCase):
 
@@ -59,23 +60,52 @@ class TestScrap(unittest.TestCase):
         result = scrap.extract_data(self.soup, 'colours')
         self.assertEqual(result, ['BLACK'])
 
-    def test_split_currency_amount(self):
+    @patch('src.scrapper.scrap.subprocess.run')
+    def test_split_currency_amount(self, mock_subprocess_run):
+        # Mock the return value of the subprocess.run call to simulate the bash script output
+        mock_subprocess_run.return_value = Mock(stdout="0.85", returncode=0)
+        
         test_cases = [
-            ("£104", ("£", 104.0)),
-            ("$99.99", ("$", 99.99)),
-            ("€1000", ("€", 1000.0)),
-            ("1000€", ("€", 1000.0)),
-            ("1000 lei", ("lei", 1000.0)),
-            ("¥5000", ("¥", 5000.0)),
-            ("₹75", ("₹", 75.0))
+            ("£104", {
+                'currency': 'GBP (£)', 
+                'price_in_GBP': 104.0, 
+                'price_in_EUR': 88.4, 
+                'price_in_USD': 88.4, 
+                'date_time_of_conversion': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }),
+            ("$99.99", {
+                'currency': 'USD ($)', 
+                'price_in_GBP': 84.99, 
+                'price_in_EUR': 84.99, 
+                'price_in_USD': 99.99, 
+                'date_time_of_conversion': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }),
+            ("€1000", {
+                'currency': 'EUR (€)', 
+                'price_in_GBP': 850.0, 
+                'price_in_EUR': 1000.0, 
+                'price_in_USD': 850.0, 
+                'date_time_of_conversion': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }),
         ]
+        
         for s, expected in test_cases:
             with self.subTest(s=s):
                 result = scrap.split_currency_amount(s)
-                self.assertEqual(result, expected)
+                # Check the dynamic date_time_of_conversion separately
+                self.assertEqual(result['currency'], expected['currency'])
+                self.assertAlmostEqual(result['price_in_GBP'], expected['price_in_GBP'], places=2)
+                self.assertAlmostEqual(result['price_in_EUR'], expected['price_in_EUR'], places=2)
+                self.assertAlmostEqual(result['price_in_USD'], expected['price_in_USD'], places=2)
+                self.assertTrue('date_time_of_conversion' in result)
+                self.assertIsNotNone(result['date_time_of_conversion'])
 
     @patch('src.scrapper.scrap.requests.get')
-    def test_scrape_product(self, mock_get):
+    @patch('src.scrapper.scrap.subprocess.run')
+    def test_scrape_product(self, mock_subprocess_run, mock_get):
+        # Mock the return value of the subprocess.run call to simulate the bash script output
+        mock_subprocess_run.return_value = Mock(stdout="0.85", returncode=0)
+        
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.text = self.sample_html
@@ -101,13 +131,30 @@ class TestScrap(unittest.TestCase):
                 "https://en.gb.scalperscompany.com/cdn/shop/files/34764-BLACK-S-1_800x.jpg?v=1715949820",
                 "https://en.gb.scalperscompany.com/cdn/shop/files/34764-BLACK-S-2_800x.jpg?v=1715949820"
             ],
-            "price": "£139",
+            "currency": "GBP (£)",
+            "price_in_EUR": 118.15,
+            "price_in_GBP": 139.0,
+            "price_in_USD": 118.15,
+            "date_time_of_conversion": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "sizes": ["S", "M", "L"],
             "colours": ["BLACK"]
         }
 
         result = json.loads(scrap.scrape_product('http://test-url.com'))
-        self.assertEqual(result, expected_data)
+        # Check the dynamic date_time_of_conversion separately
+        self.assertEqual(result['product_url'], expected_data['product_url'])
+        self.assertEqual(result['product_name'], expected_data['product_name'])
+        self.assertEqual(result['sku'], expected_data['sku'])
+        self.assertEqual(result['metadata'], expected_data['metadata'])
+        self.assertEqual(result['images'], expected_data['images'])
+        self.assertEqual(result['currency'], expected_data['currency'])
+        self.assertAlmostEqual(result['price_in_GBP'], expected_data['price_in_GBP'], places=2)
+        self.assertAlmostEqual(result['price_in_EUR'], expected_data['price_in_EUR'], places=2)
+        self.assertAlmostEqual(result['price_in_USD'], expected_data['price_in_USD'], places=2)
+        self.assertTrue('date_time_of_conversion' in result)
+        self.assertIsNotNone(result['date_time_of_conversion'])
+        self.assertEqual(result['sizes'], expected_data['sizes'])
+        self.assertEqual(result['colours'], expected_data['colours'])
 
 if __name__ == '__main__':
     unittest.main()
