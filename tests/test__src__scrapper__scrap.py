@@ -69,29 +69,38 @@ class TestScrap(unittest.TestCase):
             ("£104", {
                 'currency': 'GBP (£)', 
                 'price_in_GBP': 104.0, 
-                'price_in_EUR': 88.4, 
+                'price_in_EUR': 88.4,
+                'price_in_CLP': 88.4,
+                'price_in_COP': 88.4,
+                'price_in_MXN': 88.4,
                 'price_in_USD': 88.4, 
                 'date_time_of_conversion': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             }),
             ("$99.99", {
                 'currency': 'USD ($)', 
                 'price_in_GBP': 84.99, 
-                'price_in_EUR': 84.99, 
+                'price_in_EUR': 84.99,
+                'price_in_CLP': 84.99,
+                'price_in_COP': 84.99,
+                'price_in_MXN': 84.99,
                 'price_in_USD': 99.99, 
                 'date_time_of_conversion': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             }),
             ("€1000", {
                 'currency': 'EUR (€)', 
                 'price_in_GBP': 850.0, 
-                'price_in_EUR': 1000.0, 
+                'price_in_EUR': 1000.0,
+                'price_in_CLP': 850.0,
+                'price_in_COP': 850.0,
+                'price_in_MXN': 850.0,
                 'price_in_USD': 850.0, 
                 'date_time_of_conversion': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             }),
         ]
         
         for s, expected in test_cases:
-            with self.subTest(s=s):
-                result = scrap.split_currency_amount(s)
+            with self.subTest(s=s, url="http://test-url.com"):
+                result = scrap.split_currency_amount(s,"http://test-url.com")
                 # Check the dynamic date_time_of_conversion separately
                 self.assertEqual(result['currency'], expected['currency'])
                 self.assertAlmostEqual(result['price_in_GBP'], expected['price_in_GBP'], places=2)

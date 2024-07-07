@@ -87,7 +87,7 @@ def get_last_price(url):
     return price
 
 
-def split_currency_amount(s):
+def split_currency_amount(s, url):
     currency = ''.join(filter(
         lambda char: not char.isdigit() and char != '.',
         s
@@ -99,7 +99,7 @@ def split_currency_amount(s):
     )))
     
     # Define the currencies you want to convert to
-    target_currencies = ["EUR", "GBP", "USD"]
+    target_currencies = ["EUR", "CLP", "COP", "GBP", "MXN", "USD"]
     
     # Initialize the currency dictionary
     currency_dict = {
@@ -229,7 +229,7 @@ def scrape_product(url):
         # Extract price conversion
         if data and class_name == "ProductMeta__Price":
             update_data_dict = lambda d, u: d.update(u)
-            data_dict_prices = split_currency_amount(data)
+            data_dict_prices = split_currency_amount(data, url)
             for key, value in data_dict_prices.items():
                 update_data_dict(data_dict, {key: value})
             continue
