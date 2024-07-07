@@ -220,9 +220,16 @@ Here is an example of its output:
 }
 ```
 
+## infra
+### get\_last\_price.sh
+Bash script to get the most recent price from stock or currency exchange via Google Finance webpage.
+
 ## app
 #### get\_all\_products\_from\_collection.py
 This script runs recursively `scrapper.py` to get an array of product data from all collection items.
 
 #### get\_all\_products\_from\_shop.py
 It do the same as `get\_all\_products\_from\_collection.py` but iterating on all unique collection URLs.
+Supported shops:
+- https://en.gb.scalperscompany.com
+- https://en.ww.scalperscompany.com
