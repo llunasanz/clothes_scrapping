@@ -16,13 +16,14 @@ RUN poetry install
 
 COPY app /srv/project/app
 COPY assets /srv/project/assets
+COPY infra /srv/project/infra
 COPY schema /srv/project/schema
 COPY src /srv/project/src
 COPY tests /srv/project/tests
 
 # Ensure the scripts are executable
-RUN chmod +x /app/infra/get_last_price.sh
-RUN chmod +x /app/tests/test__infra__get_last_price.sh
+RUN chmod +x /srv/project//infra/get_last_price.sh
+RUN chmod +x /srv/project//tests/test__infra__get_last_price.sh
 
 RUN mkdir output/
 
